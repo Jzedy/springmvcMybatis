@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+">
+
+
+    <!-- 自动扫描 -->
+    <context:component-scan base-package="com.cn.jzedy">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:exclude-filter>
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"></context:exclude-filter>
+    </context:component-scan>
+    <!-- 引入配置文件 -->
+    <context:property-placeholder location="classpath*:/db.properties"></context:property-placeholder>
+
+    <!--引入数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!--这个有点坑  一般都写的是driver-->
+        <property name="driverClassName" value="${driver}"></property>
+        <property name="url" value="${url}"></property>
+        <property name="username" value="${spring.datasource.username}"></property>
+        <property name="password" value="${password}"></property>
+        <!--此处可以写连接池最大连接数量 初始化大小等-->
+    </bean>
+
+    <import resource="classpath*:spring-mybatis.xml"></import>
+</beans>
