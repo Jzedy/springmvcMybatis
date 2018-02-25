@@ -105,4 +105,12 @@
     SELECT <include refid="Base_Column_List" />
     FROM users
   </select>
+    <select id="findByUser" resultType="com.cn.jzedy.model.Users">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM users
+        WHERE 1 =1
+        <if test="username != null">
+            AND username LIKE #{username}
+        </if>
+    </select>
 </mapper>

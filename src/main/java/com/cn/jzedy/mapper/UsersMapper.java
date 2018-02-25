@@ -54,4 +54,6 @@ public interface UsersMapper {
     int updateByPrimaryKey(Users record);
 
     List<Users> findAll();
+
+    List<Users> findByUser(Users users);
 }

@@ -8,4 +8,6 @@ public interface UserService {
     List<Users> findAll();
 
     Users findById(String id);
+
+    List<Users> findAll(Users users);
 }
