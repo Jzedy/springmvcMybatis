@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/user")
 public class UsersController {
 
     @Resource(name = "userService")
@@ -24,5 +25,10 @@ public class UsersController {
         model.addAttribute("username",users.getUsername());
         model.addAttribute("users",usersList);
         return "index";
+    }
+
+    @RequestMapping(value = "/add")
+    public String add(){
+        return "add";
     }
 }
