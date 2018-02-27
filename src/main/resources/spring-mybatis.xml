@@ -9,7 +9,7 @@
 
     <!-- mapper扫描器 spring 与mybatis整合配置-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.cn.jzedy.mapper"/>
+        <property name="basePackage" value="com.cn.jzedy.common.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 

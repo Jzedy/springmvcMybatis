@@ -37,7 +37,7 @@
                             <td>${user.username}</td>
                             <td>${user.password}</td>
                             <td>
-                                <button class="btn btn-info">编辑</button>
+                                <button class="btn btn-primary">编辑</button>
                                 <button class="btn btn-danger">删除</button>
                             </td>
                         </tr>
@@ -57,8 +57,11 @@
 
     function add() {
         layer.open({
-            type:4,
-            content:'${ctx}/user/add'
+            type:2,
+            title: "添加",
+            shade: 0.5,
+            area:['40%', '40%'],
+            content:'${ctx}/user/addView'
         })
     }
 </script>

@@ -13,7 +13,24 @@
 </head>
 <body>
 <div class="container">
-    hello
+    <form  type="post" class="form-horizontal" id="searchForm">
+        <input type="hidden" name="id" value="${data.id}">
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-lg-3">姓名</label>
+            <div class="col-md-9 col-sm-9 col-lg-9 ">
+                <input type="text" class="form-control" name="username" value="${data.username}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-lg-3">密码</label>
+            <div class="col-md-9 col-sm-9 col-lg-9 ">
+                <input type="text" class="form-control" name="password" value="${data.password}">
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-info pull-right" onclick="save()">保存</button>
+        </div>
+    </form>
 </div>
 </body>
 
@@ -23,11 +40,18 @@
         var layer = layui.layer;
     });
 
-    function add() {
-        layer.open({
-            type:4,
-            content:'${ctx}/user/add'
+    function save() {
+        $.ajax({
+            url:'${ctx}/user/saveOrEdit',
+            type:'post',
+            data:$('#searchForm').serialize(),
+            success:function (data) {
+                layer.alert("操作成功",function () {
+                    window.location.reload();
+                })
+            }
         })
     }
+
 </script>
 </html>
