@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 
 public class BaseController {
 
+    protected static final String REDIECT = "redirect:";
+
+
     @ModelAttribute
     public void getPath(HttpServletRequest request, Model model){
         model.addAttribute( "ctx", request.getContextPath() );

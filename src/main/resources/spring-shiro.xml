@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean name="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"></property>
+        <property name="loginUrl" value="/"></property>
+        <property name="successUrl" value="/user/findAll"></property>
+        <property name="unauthorizedUrl" value="/error/permission"></property>
+        <!--<property name="filters">-->
+            <!--<map>-->
+                <!--<entry key="logout" value-ref="logout"></entry>-->
+            <!--</map>-->
+        <!--</property>-->
+        <property name="filterChainDefinitions">
+            <value>
+                /static/** = anon
+                /login = anon
+                /error/** = anon
+                /logout = logout
+                /** = authc
+            </value>
+        </property>
+    </bean>
+
+    <!--<bean name="logout"></bean>-->
+
+    <!--配置进行授权和认证的realm-->
+    <bean name="userRealm" class="com.cn.jzedy.shiro.UserRealm"></bean>
+
+    <bean name="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="userRealm"></property>
+        <property name="sessionMode" value="native"></property>
+    </bean>
+</beans>

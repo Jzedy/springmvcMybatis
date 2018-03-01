@@ -3,7 +3,7 @@ package com.cn.jzedy.common.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.cn.jzedy.base.controller.BaseController;
 import com.cn.jzedy.base.response.ResponseData;
-import com.cn.jzedy.common.model.Users;
+import com.cn.jzedy.common.model.User;
 import com.cn.jzedy.common.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +27,9 @@ public class UsersController extends BaseController{
      * @return
      */
     @RequestMapping(value = "/findAll")
-    public String findAll(Model model,Users users){
+    public String findAll(Model model,User users){
 //        Users users = userService.findById("1");
-        List<Users> usersList = userService.findData(users);
+        List<User> usersList = userService.findData(users);
         System.out.println(JSONObject.toJSONString(usersList));
         model.addAttribute("username",users.getUsername());
         model.addAttribute("users",usersList);
@@ -43,8 +43,8 @@ public class UsersController extends BaseController{
      * @return
      */
     @RequestMapping(value = "/addView")
-    public String addView(Model model,Users user){
-        Users users = userService.findById(user.getId());
+    public String addView(Model model,User user){
+        User users = userService.findById(user.getId());
         model.addAttribute("data",users);
         return "user/add";
     }
@@ -57,13 +57,13 @@ public class UsersController extends BaseController{
      */
     @ResponseBody
     @RequestMapping(value = "/saveOrEdit")
-    public ResponseData saveOrEdit(Model model, Users user){
+    public ResponseData saveOrEdit(Model model, User user){
         userService.save(user);
         return ResponseData.ok();
     }
 
     @RequestMapping(value = "delete")
-    public ResponseData delete(Users users){
+    public ResponseData delete(User users){
         userService.deleteById(users.getId());
         return ResponseData.ok();
     }
