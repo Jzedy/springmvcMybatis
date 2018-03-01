@@ -27,14 +27,14 @@ public class UsersController extends BaseController{
         System.out.println(JSONObject.toJSONString(usersList));
         model.addAttribute("username",users.getUsername());
         model.addAttribute("users",usersList);
-        return "index";
+        return "user/index";
     }
 
     @RequestMapping(value = "/addView")
     public String addView(Model model,Users user){
         Users users = userService.findById(user.getId());
         model.addAttribute("data",users);
-        return "add";
+        return "user/add";
     }
 
     @ResponseBody
