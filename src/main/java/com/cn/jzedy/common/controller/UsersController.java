@@ -20,6 +20,12 @@ public class UsersController extends BaseController{
     @Resource(name = "userService")
     private UserService userService;
 
+    /**
+     * 条件查询所有
+     * @param model
+     * @param users
+     * @return
+     */
     @RequestMapping(value = "/findAll")
     public String findAll(Model model,Users users){
 //        Users users = userService.findById("1");
@@ -30,6 +36,12 @@ public class UsersController extends BaseController{
         return "user/index";
     }
 
+    /**
+     * 跳转到添加界面
+     * @param model
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "/addView")
     public String addView(Model model,Users user){
         Users users = userService.findById(user.getId());
@@ -37,10 +49,22 @@ public class UsersController extends BaseController{
         return "user/add";
     }
 
+    /**
+     * 保存或修改
+     * @param model
+     * @param user
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/saveOrEdit")
     public ResponseData saveOrEdit(Model model, Users user){
         userService.save(user);
+        return ResponseData.ok();
+    }
+
+    @RequestMapping(value = "delete")
+    public ResponseData delete(Users users){
+        userService.deleteById(users.getId());
         return ResponseData.ok();
     }
 

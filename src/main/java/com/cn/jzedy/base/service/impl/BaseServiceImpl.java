@@ -40,7 +40,6 @@ public class BaseServiceImpl<T extends BaseEntity> implements BaseService<T> {
     @Override
     public T save(T entity) {
         if (StringUtils.isBlank(entity.getId())){
-            // TODO: 2018/2/27 id添加
             SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(4, 4);
             entity.setId(String.valueOf(snowflakeIdWorker.nextId()));
         }
