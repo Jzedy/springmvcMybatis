@@ -21,7 +21,7 @@ public class LoginController extends BaseController{
     @RequestMapping(value = "/login")
     public String login(User user){
         Subject subject = SecurityUtils.getSubject();
-        subject.login(new UsernamePasswordToken(user.getUsername(),user.getPassword()));
+        subject.login(new UsernamePasswordToken(user.getUsername(),user.getPassword(),null));
         if (subject.isAuthenticated()){
             return REDIECT + "/user/findAll";
         }else return REDIECT + "/";

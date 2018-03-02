@@ -2,13 +2,11 @@ package com.cn.jzedy.shiro;
 
 import com.cn.jzedy.common.model.User;
 import com.cn.jzedy.common.service.UserService;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
 
 import javax.annotation.Resource;
 
@@ -40,12 +38,21 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        String loginName = (String) token.getPrincipal();
-        User user = userService.getUserByUsername(loginName);
+//        String loginName = (String) token.getPrincipal();
+
+        User userLogin = tokenToUser((UsernamePasswordToken) token);
+        User user = userService.getUserByUsername(userLogin.getUsername());
         if (user == null){
             return null;
         }else {
-            return new SimpleAuthenticationInfo(token.getPrincipal(),user.getPassword(),user.getUsername());
+            return new SimpleAuthenticationInfo(userLogin.getUsername(),userLogin.getPassword(),getName());
         }
+    }
+
+    private User tokenToUser(UsernamePasswordToken token) {
+        User user = new User();
+        user.setUsername(token.getUsername());
+        user.setPassword(String.valueOf(token.getPassword()));
+        return user;
     }
 }
