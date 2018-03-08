@@ -62,6 +62,11 @@ public class UsersController extends BaseController{
         return ResponseData.ok();
     }
 
+    /**
+     * 删除方法
+     * @param users
+     * @return
+     */
     @RequestMapping(value = "delete")
     public ResponseData delete(User users){
         userService.deleteById(users.getId());
