@@ -110,7 +110,7 @@
         FROM users
         WHERE 1 =1
         <if test="username != null and username.trim.length > 0">
-            AND username LIKE #{username}
+            AND username LIKE "%"#{username}"%"
         </if>
     </select>
   <select id="getUserByUsername" resultType="com.cn.jzedy.common.model.User">
