@@ -67,7 +67,8 @@ public class UsersController extends BaseController{
      * @param users
      * @return
      */
-    @RequestMapping(value = "delete")
+    @ResponseBody
+    @RequestMapping(value = "/delete")
     public ResponseData delete(User users){
         userService.deleteById(users.getId());
         return ResponseData.ok();

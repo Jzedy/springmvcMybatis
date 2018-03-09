@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="row">
-            <button class="btn btn-info pull-right" onclick="save()">保存</button>
+            <a class="btn btn-info pull-right" onclick="save()">保存</a>
         </div>
     </form>
 </div>
@@ -42,13 +42,13 @@
 
     function save() {
         $.ajax({
-            url:'${ctx}/user/saveOrEdit',
-            type:'post',
-            data:$('#searchForm').serialize(),
-            success:function (data) {
-                layer.alert("操作成功",function () {
-                    window.location.reload();
-                })
+            url: '${ctx}/user/saveOrEdit',
+            type: 'post',
+            data: $('#searchForm').serialize(),
+            success: function (data) {
+                var index=parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+                window.parent.location.reload()
             }
         })
     }

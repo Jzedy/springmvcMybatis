@@ -13,12 +13,12 @@
 </head>
 <body>
 <div class="container">
-    <form action="${ctx}/user/findAll">
+    <form type="post" action="${ctx}/user/findAll" class="form-horizontal">
         <div class="form-group">
             <label for="name">名称:</label>
             <input type="text" name="username" id="name" placeholder="请输入查找名称" value="${username}">
             <button class="btn btn-info">搜索</button>
-            <div class="btn btn-info pull-right" onclick="add()">添加</div>
+            <a class="btn btn-info pull-right" onclick="add()">添加</a>
         </div>
         <div class="form-group">
             <table class="table table-responsive">
@@ -37,8 +37,8 @@
                             <td>${user.username}</td>
                             <td>${user.password}</td>
                             <td>
-                                <button class="btn btn-primary">编辑</button>
-                                <button class="btn btn-danger">删除</button>
+                                <a class="btn btn-primary" onclick="edit ('${user.id}')">编辑</a>
+                                <a class="btn btn-danger" onclick="deleteById('${user.id}')">删除</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -61,8 +61,39 @@
             title: "添加",
             shade: 0.5,
             area:['40%', '40%'],
-            content:'${ctx}/user/addView'
+            content:'${ctx}/user/addView',
+            success:function (layero, index) {
+                layer.iframeAuto(index);
+            }
         })
+    }
+    
+    function deleteById(id) {
+        layer.confirm('确认删除?',{
+            btn:['确认','取消']
+        },function () {
+            $.ajax({
+                url: '${ctx}/user/delete',
+                data:{id : id},
+                type: 'post',
+                success: function (data) {
+                    var index=parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    location.reload()
+                }
+            })
+        })
+    }
+    
+    function edit(id) {
+        layer.open({
+            type:2,
+            title: "编辑",
+            shade: 0.5,
+            area:['40%', '40%'],
+            content:'${ctx}/user/addView?id='+id
+        })
+        
     }
 </script>
 </html>
