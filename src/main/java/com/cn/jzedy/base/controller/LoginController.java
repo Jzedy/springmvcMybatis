@@ -33,4 +33,9 @@ public class LoginController extends BaseController{
         }
 
     }
+
+    @RequestMapping(value = "/test")
+    public String test(){
+        return "/user/test";
+    }
 }
