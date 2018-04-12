@@ -25,5 +25,9 @@
         <!--此处可以写连接池最大连接数量 初始化大小等-->
     </bean>
 
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
     <import resource="classpath*:spring-mybatis.xml"></import>
 </beans>
