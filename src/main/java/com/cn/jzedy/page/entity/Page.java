@@ -16,7 +16,10 @@ public class Page {
     private boolean isLast; //是否是最后一页
     private List<Map<String,Object>> contents; //数据内容
 
-    public Page(int pageNum, int pageSize,long total, List<Map<String,Object>> contents) {
+    public Page() {
+    }
+
+    public Page(int pageNum, int pageSize, long total, List<Map<String,Object>> contents) {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.contents = contents;

@@ -28,8 +28,29 @@
                         <li class="disabled"><a href="javascript:void (0)">上一页</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class=""><a href="javascript:void (0)">首页</a></li>
-                        <li class=""><a href="javascript:void (0)">上一页</a></li>
+                        <li class=""><a href="javascript:pageSearch(1)">首页</a></li>
+                        <li class=""><a href="javascript:pageSearch(${page.pageSize-1})">上一页</a></li>
+                    </c:otherwise>
+                </c:choose>
+                <c:forEach var="index" begin="1" end="${page.totalPages}">
+                    <c:choose>
+                        <c:when test="${index == page.pageSize}">
+                            <li class="active"><a href="javascript:pageSearch(${index})">${index}</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="javascript:pageSearch(${index})">${index}</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+
+                <c:choose>
+                    <c:when test="${page.last}">
+                        <li class="disabled"><a href="javascript:void (0)">下一页</a></li>
+                        <li class="disabled"><a href="javascript:void (0)">末页</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class=""><a href="javascript:pageSearch(${page.pageSize+1})">下一页</a></li>
+                        <li class=""><a href="javascript:pageSearch(${page.totalPages})">末页</a></li>
                     </c:otherwise>
                 </c:choose>
             </ul>
@@ -37,6 +58,13 @@
     </div>
 
     <script>
-
+        function pageSearch(index) {
+            $('#${form} [name="pageSize"]').val(index)
+            $('#${form}').submit()
+//            window.location.reload()
+//            $.ajax(function () {
+//
+//            })
+        }
     </script>
 </c:if>

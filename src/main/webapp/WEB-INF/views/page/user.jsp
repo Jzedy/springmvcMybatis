@@ -3,6 +3,8 @@
 <%@ taglib prefix="frame" tagdir="/WEB-INF/tags/frame" %>
 <frame:page pageTitle="user列表">
     <form action="${ctx}/page/user"id="searchForm">
+        <input type="hidden" name="pageNum" value="${data.pageNum}">
+        <input type="hidden" name="pageSize" value="${data.pageSize}">
         <table class="table">
             <tbody class="table-responsive">
             <c:forEach items="${data.contents}" var="content">
