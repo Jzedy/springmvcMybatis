@@ -34,6 +34,7 @@ public class BaseController {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Map errorHandler(Exception e){
+        e.printStackTrace();
         Map map = new HashMap();
         map.put("code", ResponseContents.KEY_ERROR);
         map.put("msg",e.getMessage());
